@@ -1,12 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
+import Signup from './components/Signup/Signup';
 
 function App() {
-  return (
-    <div className='App'>
-      <h1>Sign Up Form</h1>
-    </div>
-  );
+  return <Signup />;
 }
 
 export default App;
