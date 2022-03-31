@@ -1,8 +1,14 @@
-import './App.css';
-import Signup from './components/Signup/Signup';
+import "./App.css";
+import HomePage from "./components/HomePage/HomePage";
+import SignupPage from "./components/SignupPage/SignupPage";
 
 function App() {
-  return <Signup />;
+  return (
+    <>
+      {/* <SignupPage /> */}
+      <HomePage />
+    </>
+  );
 }
 
 export default App;

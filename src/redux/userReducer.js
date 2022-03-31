@@ -1,10 +1,10 @@
 const initialValues = {
   users: {
-    name: '',
-    email: '',
-    phonenumber: '',
-    password: '',
-    confirmpassword: '',
+    name: "user",
+    email: "user@user.com",
+    phonenumber: "9876730828",
+    password: "",
+    confirmpassword: "",
   },
 };
 
