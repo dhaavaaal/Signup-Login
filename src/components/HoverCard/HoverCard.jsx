@@ -9,7 +9,7 @@ const HoverCard = (props) => {
   return (
     <div className={styles["usercard-container"]}>
       <div className={styles["usercard-inner"]}>
-        {/* <div className={styles["fill-background-top"]}></div> */}
+        <div className={styles["fill-background-top"]}></div>
         <div className={styles["user-data"]}>
           <img
             src={image}

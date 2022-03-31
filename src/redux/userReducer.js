@@ -1,7 +1,7 @@
 const initialValues = {
   users: {
-    name: "user",
-    email: "user@user.com",
+    name: "Simform Solutions",
+    email: "simform@simformsolutions.com",
     phonenumber: "9876730828",
     password: "",
     confirmpassword: "",
