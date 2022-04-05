@@ -22,8 +22,17 @@ const validationSchema = Yup.object({
     .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
-const onSubmit = (values) => {
+const onSubmit = (values, { resetForm }) => {
   console.log(values);
+  const user = {
+    username: values.username,
+    email: values.email,
+    password: values.password,
+  };
+  console.log(user);
+  //registerUser(user)
+  //re direct here ?
+  // resetForm();
 };
 
 const SignupPage = () => {
@@ -32,16 +41,27 @@ const SignupPage = () => {
     <Formik
       initialValues={userInput}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      onSubmit={(values) => {
+        console.log(values);
+        const user = {
+          username: values.username,
+          email: values.email,
+          password: values.password,
+        };
+        console.log(user);
+        //registerUser(user)
+        //re direct here ?
+        // resetForm();
+      }}
       validateOnMount
       enableReinitialize
     >
-      {(formik) => {
-        console.log(formik);
+      {(formik, handleChange) => {
+        // console.log(formik);
         return (
           <div className={styles["signup-form-container"]}>
             <div className={styles["inner-signup-form"]}>
-              <Form>
+              <form onSubmit={handleChange}>
                 <h1>SignUp</h1>
                 <div className={styles["input-fields"]}>
                   <button className={styles["photo-upload"]}>Photo +</button>
@@ -86,7 +106,7 @@ const SignupPage = () => {
                     Reset
                   </button>
                 </div>
-              </Form>
+              </form>
             </div>
             <div className={styles["image-container"]}>
               <img
