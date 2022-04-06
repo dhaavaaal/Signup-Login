@@ -1,6 +1,6 @@
 .signup-form-container {
   position: absolute;
-  height: 70%;
+  min-height: 65%;
   left: 30%;
   width: 40%;
   display: flex;

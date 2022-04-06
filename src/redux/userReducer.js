@@ -1,23 +1,32 @@
-import { ON_SUBMIT_DATA } from "./actionTypes";
+import { ON_LOG_OUT, ON_SUBMIT_DATA } from "./actionTypes";
 
 const initialValues = {
-  isLoggedIn: false,
   users: {
-    name: "Simform Solutions",
-    email: "simform@simformsolutions.com",
-    phonenumber: "9876730828",
+    avatar: "",
+    name: "",
+    email: "",
+    phonenumber: "",
     password: "",
     confirmpassword: "",
+    isLoggedIn: false,
   },
 };
 
 const reducerFunction = (state = initialValues, action) => {
+  console.log(state);
   switch (action.type) {
     case ON_SUBMIT_DATA:
       console.log(action.payload);
       return {
+        ...state,
         users: action.payload,
-        isLoggedIn: true,
+      };
+    case ON_LOG_OUT:
+      // console.log;
+      localStorage.clear();
+      return {
+        ...state,
+        users: initialValues,
       };
     default:
       return state;

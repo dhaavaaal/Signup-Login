@@ -12,6 +12,7 @@ const InputField = (props) => {
           type={props.type}
           id={props.id}
           name={props.name}
+          style={props.style}
           className={styles.input}
         />
         <ErrorMessage name={props.name} component={TextError} />

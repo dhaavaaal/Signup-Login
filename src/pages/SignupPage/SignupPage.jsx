@@ -1,14 +1,18 @@
-import { Form, Formik } from "formik";
-import React from "react";
+import { Field, Form, Formik } from "formik";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import image from "../../images/prac-08.png";
-import InputField from "../InputField/InputField";
+import InputField from "../../components/InputField/InputField";
 import styles from "./SignupPage.module.css";
 import "yup-phone";
 import { onSubmitData } from "../../redux/actions";
+import { useNavigate } from "react-router";
+import DropZone from "react-dropzone";
+import { User } from "react-feather";
 
 const validationSchema = Yup.object({
+  // avatar: Yup.required("Image Required!"),
   name: Yup.string().required("Required Field"),
   email: Yup.string().email("Invalid email format").required("Required Field"),
   phonenumber: Yup.string().phone("IN", true).required("Required Field"),
@@ -23,39 +27,71 @@ const validationSchema = Yup.object({
     .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
-const onSubmit = (dispatch, values, { resetForm }) => {
+const onSubmit = (dispatch, navigate, values, { resetForm }) => {
   console.log(values);
+  const avatarURL = URL.createObjectURL(values.avatar);
+  console.log(values.avatar);
   const user = {
+    avatar: avatarURL,
     name: values.name,
     email: values.email,
     phonenumber: values.phonenumber,
+    isLoggedIn: true,
   };
   console.log(user);
+  localStorage.setItem("isLoggedIn", JSON.stringify(user));
   dispatch(onSubmitData(user));
+  navigate("/home");
   resetForm();
 };
 
 const SignupPage = () => {
   const userInput = useSelector((state) => state.users);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const ref = useRef();
+
   return (
     <Formik
       initialValues={userInput}
       validationSchema={validationSchema}
-      onSubmit={onSubmit.bind(null, dispatch)}
-      // onSubmit={(values) =>   useDispatch(onSubmitData(values))}
+      onSubmit={onSubmit.bind(null, dispatch, navigate)}
       validateOnMount
       enableReinitialize
     >
       {(formik) => {
-        // console.log(formik);
+        console.log(formik);
         return (
           <div className={styles["signup-form-container"]}>
             <div className={styles["inner-signup-form"]}>
               <Form>
                 <h1>SignUp</h1>
                 <div className={styles["input-fields"]}>
-                  <button className={styles["photo-upload"]}>Photo +</button>
+                  <button
+                    type="button"
+                    name="avatar"
+                    className={styles["photo-upload"]}
+                    onClick={() => ref.current.click()}
+                  >
+                    Photo +
+                  </button>
+                  <Field
+                    style={{ display: "none" }}
+                    type="file"
+                    id="avatar"
+                    name="avatar"
+                    innerRef={ref}
+                    onChange={(event) => {
+                      if (event.currentTarget.files) {
+                        const file = event.currentTarget.files[0];
+                        console.log(file);
+                        formik.setFieldValue("avatar", file);
+                      }
+                    }}
+                    value={undefined}
+                    // as={ref}
+                  />
+
                   <InputField label="Name" type="text" id="name" name="name" />
                   <InputField
                     label="Email"
@@ -93,6 +129,7 @@ const SignupPage = () => {
                   <button
                     type="reset"
                     className={`${styles.button} ${styles["reset-button"]}`}
+                    onClick={() => formik.resetForm()}
                   >
                     Reset
                   </button>

@@ -1,4 +1,4 @@
-import { ON_SUBMIT_DATA } from "./actionTypes";
+import { ON_SUBMIT_DATA, ON_LOG_OUT } from "./actionTypes";
 
 const onSubmitData = (userData) => {
   return {
@@ -7,4 +7,10 @@ const onSubmitData = (userData) => {
   };
 };
 
-export { onSubmitData };
+const onLogOut = () => {
+  return {
+    type: ON_LOG_OUT,
+  };
+};
+
+export { onSubmitData, onLogOut };

@@ -1,10 +1,19 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./HoverCard.module.css";
 import image from "../../images/prac-08.png";
+import { onLogOut } from "../../redux/actions";
+import { useNavigate } from "react-router";
 
-const HoverCard = (props) => {
-  const userInput = useSelector((state) => state.users);
+const HoverCard = () => {
+  const { avatar, name, email, isLoggedIn, phonenumber } = useSelector(
+    (state) => state.users
+  );
+  console.table(avatar, name, email, isLoggedIn, phonenumber);
+  // const user = useSelector((state) => state.users);
+  // console.table(user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <div className={styles["usercard-container"]}>
@@ -12,18 +21,26 @@ const HoverCard = (props) => {
         <div className={styles["fill-background-top"]}></div>
         <div className={styles["user-data"]}>
           <img
-            src={image}
+            src={avatar}
             alt="user-profile"
             className={styles["user-image"]}
           />
           <div className={styles["user-name"]}>
-            <h2>{userInput.name}</h2>
-            <p>{userInput.email}</p>
-            <h4>{userInput.phonenumber}</h4>
+            <h2>{name}</h2>
+            <p>{email}</p>
+            <h4>{phonenumber}</h4>
           </div>
         </div>
         <div className={styles["fill-background-bottom"]}>
-          <button className={styles["logout-button"]}>Logout</button>
+          <button
+            className={styles["logout-button"]}
+            onClick={() => {
+              dispatch(onLogOut());
+              navigate("/");
+            }}
+          >
+            Logout
+          </button>
         </div>
       </div>
     </div>
