@@ -1,20 +1,18 @@
 import { Form, Formik } from "formik";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import image from "../../images/prac-08.png";
 import InputField from "../InputField/InputField";
 import styles from "./SignupPage.module.css";
 import "yup-phone";
-import { Route, Routes } from "react-router";
-import HoverCard from "../HoverCard/HoverCard";
-import HomePage from "../HomePage/HomePage";
+import { onSubmitData } from "../../redux/actions";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Required Field"),
   email: Yup.string().email("Invalid email format").required("Required Field"),
   phonenumber: Yup.string().phone("IN", true).required("Required Field"),
-  password: Yup.string("Required")
+  password: Yup.string()
     .required("Please Enter your password")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
@@ -25,7 +23,7 @@ const validationSchema = Yup.object({
     .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
-const onSubmit = (values, { resetForm }) => {
+const onSubmit = (dispatch, values, { resetForm }) => {
   console.log(values);
   const user = {
     name: values.name,
@@ -33,23 +31,24 @@ const onSubmit = (values, { resetForm }) => {
     phonenumber: values.phonenumber,
   };
   console.log(user);
-  //registerUser(user)
-
+  dispatch(onSubmitData(user));
   resetForm();
 };
 
 const SignupPage = () => {
   const userInput = useSelector((state) => state.users);
+  const dispatch = useDispatch();
   return (
     <Formik
       initialValues={userInput}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      onSubmit={onSubmit.bind(null, dispatch)}
+      // onSubmit={(values) =>   useDispatch(onSubmitData(values))}
       validateOnMount
       enableReinitialize
     >
       {(formik) => {
-        console.log(formik);
+        // console.log(formik);
         return (
           <div className={styles["signup-form-container"]}>
             <div className={styles["inner-signup-form"]}>
@@ -86,7 +85,7 @@ const SignupPage = () => {
                 <div className={styles["form-buttons"]}>
                   <button
                     type="submit"
-                    // disabled={!formik.isValid || formik.isSubmitting}
+                    disabled={!formik.isValid || formik.isSubmitting}
                     className={`${styles.button} ${styles["submit-button"]}`}
                   >
                     Submit
