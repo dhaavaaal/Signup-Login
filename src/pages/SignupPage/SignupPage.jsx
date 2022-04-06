@@ -39,7 +39,7 @@ const onSubmit = (dispatch, navigate, values, { resetForm }) => {
     isLoggedIn: true,
   };
   console.log(user);
-  localStorage.setItem("isLoggedIn", JSON.stringify(user));
+  localStorage.setItem("userDetails", JSON.stringify(user));
   dispatch(onSubmitData(user));
   navigate("/home");
   resetForm();
