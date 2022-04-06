@@ -6,33 +6,36 @@ import image from "../../images/prac-08.png";
 import InputField from "../InputField/InputField";
 import styles from "./SignupPage.module.css";
 import "yup-phone";
+import { Route, Routes } from "react-router";
+import HoverCard from "../HoverCard/HoverCard";
+import HomePage from "../HomePage/HomePage";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Required Field"),
   email: Yup.string().email("Invalid email format").required("Required Field"),
   phonenumber: Yup.string().phone("IN", true).required("Required Field"),
-  password: Yup.string()
+  password: Yup.string("Required")
     .required("Please Enter your password")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
       "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     ),
-  confirmPassword: Yup.string()
-    .required()
+  confirmpassword: Yup.string()
+    .required("Required")
     .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
 const onSubmit = (values, { resetForm }) => {
   console.log(values);
   const user = {
-    username: values.username,
+    name: values.name,
     email: values.email,
-    password: values.password,
+    phonenumber: values.phonenumber,
   };
   console.log(user);
   //registerUser(user)
-  //re direct here ?
-  // resetForm();
+
+  resetForm();
 };
 
 const SignupPage = () => {
@@ -41,27 +44,16 @@ const SignupPage = () => {
     <Formik
       initialValues={userInput}
       validationSchema={validationSchema}
-      onSubmit={(values) => {
-        console.log(values);
-        const user = {
-          username: values.username,
-          email: values.email,
-          password: values.password,
-        };
-        console.log(user);
-        //registerUser(user)
-        //re direct here ?
-        // resetForm();
-      }}
+      onSubmit={onSubmit}
       validateOnMount
       enableReinitialize
     >
-      {(formik, handleChange) => {
-        // console.log(formik);
+      {(formik) => {
+        console.log(formik);
         return (
           <div className={styles["signup-form-container"]}>
             <div className={styles["inner-signup-form"]}>
-              <form onSubmit={handleChange}>
+              <Form>
                 <h1>SignUp</h1>
                 <div className={styles["input-fields"]}>
                   <button className={styles["photo-upload"]}>Photo +</button>
@@ -94,7 +86,7 @@ const SignupPage = () => {
                 <div className={styles["form-buttons"]}>
                   <button
                     type="submit"
-                    disabled={!formik.isValid || formik.isSubmitting}
+                    // disabled={!formik.isValid || formik.isSubmitting}
                     className={`${styles.button} ${styles["submit-button"]}`}
                   >
                     Submit
@@ -106,7 +98,7 @@ const SignupPage = () => {
                     Reset
                   </button>
                 </div>
-              </form>
+              </Form>
             </div>
             <div className={styles["image-container"]}>
               <img
