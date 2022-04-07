@@ -6,11 +6,12 @@ import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { onSubmitData } from "./redux/actions";
+import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loggedIn = useSelector((user) => user.isLoggedIn);
+  const loggedIn = useSelector((state) => state.users.isLoggedIn);
   useEffect(() => {
     const refreshDetails = JSON.parse(localStorage.getItem("userDetails"));
     if (refreshDetails) {
@@ -24,8 +25,15 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<SignupPage />} />
-        <Route path="/home" element={<HomePage />} />
-        {/* {loggedIn && <Route path="/home" element={<HomePage />} />} */}
+        {/* <Route path="/home" element={<HomePage />} /> */}
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute loggedIn={loggedIn}>
+              <HomePage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>

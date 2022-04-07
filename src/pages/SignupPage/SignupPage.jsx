@@ -8,11 +8,11 @@ import styles from "./SignupPage.module.css";
 import "yup-phone";
 import { onSubmitData } from "../../redux/actions";
 import { useNavigate } from "react-router";
-import DropZone from "react-dropzone";
 import { User } from "react-feather";
+import { render } from "@testing-library/react";
 
 const validationSchema = Yup.object({
-  // avatar: Yup.required("Image Required!"),
+  avatar: Yup.mixed().required("Image Required!"),
   name: Yup.string().required("Required Field"),
   email: Yup.string().email("Invalid email format").required("Required Field"),
   phonenumber: Yup.string().phone("IN", true).required("Required Field"),
@@ -38,13 +38,27 @@ const onSubmit = (dispatch, navigate, values, { resetForm }) => {
     phonenumber: values.phonenumber,
     isLoggedIn: true,
   };
-  console.log(user);
-  localStorage.setItem("userDetails", JSON.stringify(user));
+  const reader = new FileReader();
+  reader.readAsDataURL(values.avatar);
+  console.log(reader);
+  reader.onloadend = () => {
+    const newuser = { ...user, avatar: reader.result };
+    // console.log(user);
+    localStorage.setItem("userDetails", JSON.stringify(newuser));
+  };
   dispatch(onSubmitData(user));
   navigate("/home");
   resetForm();
 };
 
+// const encodeImageFileAsURL = (element) => {
+//   var file = element.files[0];
+//   var reader = new FileReader();
+//   reader.onloadend = function () {
+//     console.log("RESULT", reader.result);
+//   };
+//   reader.readAsDataURL(file);
+// };
 const SignupPage = () => {
   const userInput = useSelector((state) => state.users);
   const dispatch = useDispatch();
@@ -60,7 +74,7 @@ const SignupPage = () => {
       enableReinitialize
     >
       {(formik) => {
-        console.log(formik);
+        // console.log(formik);
         return (
           <div className={styles["signup-form-container"]}>
             <div className={styles["inner-signup-form"]}>
@@ -80,16 +94,24 @@ const SignupPage = () => {
                     type="file"
                     id="avatar"
                     name="avatar"
+                    accept=".png, .jpg, .jpeg"
                     innerRef={ref}
+                    // onchange={encodeImageFileAsURL(this)}
                     onChange={(event) => {
                       if (event.currentTarget.files) {
                         const file = event.currentTarget.files[0];
-                        console.log(file);
+                        // var reader = new FileReader();
+                        // render.read
+                        // reader.onload = function () {
+                        //   console.log("Result", reader.result);
+                        // };
+                        // reader.readAsDataURL(file);
+                        // console.log(reader.readAsDataURL(file));
+                        // console.log(file);
                         formik.setFieldValue("avatar", file);
                       }
                     }}
                     value={undefined}
-                    // as={ref}
                   />
 
                   <InputField label="Name" type="text" id="name" name="name" />

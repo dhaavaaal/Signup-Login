@@ -37,6 +37,9 @@
   bottom: 3%;
   height: 10%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
 }
 .user-data {
   display: flex;
@@ -93,8 +96,8 @@
   background-color: rgb(122, 151, 225);
   /* rgb(89, 128, 228) */
   position: relative;
-  left: 38%;
-  bottom: 40%;
+  /* left: 38%; */
+  /* bottom: 40%; */
 }
 .logout-button:hover {
   background-color: rgb(89, 128, 228);
