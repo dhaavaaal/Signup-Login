@@ -1,0 +1,9 @@
+.homepage {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../../images/background-07.jpg");
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

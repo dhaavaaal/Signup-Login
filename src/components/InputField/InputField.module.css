@@ -1,0 +1,17 @@
+.all-inputs {
+  display: flex;
+  flex-direction: column;
+}
+label {
+  margin: 9px 0 4px 0;
+  padding: 5px 0;
+  font-size: 15px;
+}
+.input {
+  height: 26px;
+  width: 85%;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid rgb(230, 228, 228);
+  background-color: rgb(247, 234, 209);
+}
