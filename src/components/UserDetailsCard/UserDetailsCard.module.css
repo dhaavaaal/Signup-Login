@@ -1,5 +1,4 @@
 .usercard-container {
-  /* height: 550px; */
   height: 60%;
   width: 20%;
   background-color: white;
@@ -18,7 +17,6 @@
   height: 100%;
   width: 100%;
   position: relative;
-  /* top: 5%; */
 }
 .fill-background-top {
   background-color: rgb(196, 223, 246);
@@ -29,18 +27,6 @@
   height: 22%;
   width: 100%;
 }
-.fill-background-bottom {
-  /* background-color: #26946b; */
-  position: absolute;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
-  bottom: 3%;
-  height: 10%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-}
 .user-data {
   display: flex;
   flex-direction: column;
@@ -48,6 +34,14 @@
   width: 80%;
   align-items: center;
   justify-content: center;
+}
+.user-image {
+  height: 210px;
+  width: 210px;
+  border-radius: 50%;
+  position: relative;
+  top: -27%;
+  padding: 15px;
 }
 .user-name {
   position: relative;
@@ -72,14 +66,16 @@
   margin: 4px;
   padding: 4px;
 }
-.user-image {
-  height: 210px;
-  width: 210px;
-  border-radius: 50%;
-  position: relative;
-  top: -27%;
-  padding: 15px;
-  /* border: 1px solid #26946b; */
+.fill-background-bottom {
+  position: absolute;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  bottom: 3%;
+  height: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
 }
 .logout-button {
   font-weight: 400;
@@ -92,12 +88,8 @@
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   color: white;
-  /* background-color: rgb(196, 223, 246); */
   background-color: rgb(122, 151, 225);
-  /* rgb(89, 128, 228) */
   position: relative;
-  /* left: 38%; */
-  /* bottom: 40%; */
 }
 .logout-button:hover {
   background-color: rgb(89, 128, 228);

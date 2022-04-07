@@ -9,8 +9,6 @@ const HoverCard = () => {
     (state) => state.users
   );
   console.table(avatar, name, email, isLoggedIn, phonenumber);
-  // const user = useSelector((state) => state.users);
-  // console.table(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

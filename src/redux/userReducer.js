@@ -22,7 +22,6 @@ const reducerFunction = (state = initialValues, action) => {
         users: action.payload,
       };
     case ON_LOG_OUT:
-      // console.log;
       localStorage.clear();
       return {
         ...state,

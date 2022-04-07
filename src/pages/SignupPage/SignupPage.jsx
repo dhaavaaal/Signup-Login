@@ -12,7 +12,6 @@ import { useNavigate } from "react-router";
 import TextError from "../../components/TextError/TextError";
 
 const validationSchema = Yup.object({
-  // avatar: Yup.mixed().required("Image Required!"),
   avatar: Yup.mixed()
     .required("Image Required!")
     .test("fileSize", "File must be less than 2MB", (value) => {
@@ -38,9 +37,7 @@ const validationSchema = Yup.object({
 });
 
 const onSubmit = (dispatch, navigate, values, { resetForm }) => {
-  console.log(values);
   const avatarURL = URL.createObjectURL(values.avatar);
-  console.log(values.avatar);
   const user = {
     avatar: avatarURL,
     name: values.name,
@@ -50,7 +47,6 @@ const onSubmit = (dispatch, navigate, values, { resetForm }) => {
   };
   const reader = new FileReader();
   reader.readAsDataURL(values.avatar);
-  console.log(reader);
   reader.onloadend = () => {
     const newuser = { ...user, avatar: reader.result };
     localStorage.setItem("userDetails", JSON.stringify(newuser));
@@ -155,7 +151,7 @@ const SignupPage = () => {
                 <div className={styles["form-buttons"]}>
                   <button
                     type="submit"
-                    // disabled={!formik.isValid || formik.isSubmitting}
+                    disabled={!formik.isValid || formik.isSubmitting}
                     className={`${styles.button} ${styles["submit-button"]}`}
                   >
                     Submit

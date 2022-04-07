@@ -12,6 +12,7 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedIn = useSelector((state) => state.users.isLoggedIn);
+
   useEffect(() => {
     const refreshDetails = JSON.parse(localStorage.getItem("userDetails"));
     if (refreshDetails) {
@@ -20,12 +21,10 @@ function App() {
     }
   }, [dispatch, navigate]);
 
-  console.log(loggedIn);
   return (
     <>
       <Routes>
         <Route path="/" element={<SignupPage />} />
-        {/* <Route path="/home" element={<HomePage />} /> */}
         <Route
           path="/home"
           element={
