@@ -1,6 +1,6 @@
 .signup-form-container {
   position: absolute;
-  min-height: 65%;
+  min-height: 67%;
   left: 30%;
   width: 40%;
   display: flex;
@@ -16,18 +16,38 @@ h1 {
 .inner-signup-form {
   margin-left: 15px;
   width: 50%;
+  margin-bottom: 44px;
 }
 button {
   cursor: pointer;
 }
+.user-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.upload-photo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  font-size: 14px;
+}
+.avatar-preview {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+}
 .photo-upload {
-  position: relative;
-  left: 34%;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
   border: none;
   background-color: white;
 }
-.input-fields {
-}
+/* .input-fields {
+} */
 .form-buttons {
   position: relative;
   top: 30px;

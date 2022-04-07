@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./HoverCard.module.css";
-import image from "../../images/prac-08.png";
+import styles from "./UserDetailsCard.module.css";
 import { onLogOut } from "../../redux/actions";
 import { useNavigate } from "react-router";
 

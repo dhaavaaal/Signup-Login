@@ -1,11 +1,11 @@
 import styles from "./HomePage.module.css";
 import React from "react";
-import HoverCard from "../../components/HoverCard/HoverCard";
+import UserDetailsCard from "../../components/UserDetailsCard/UserDetailsCard";
 
 const HomePage = () => {
   return (
     <div className={styles.homepage}>
-      <HoverCard />
+      <UserDetailsCard />
     </div>
   );
 };
