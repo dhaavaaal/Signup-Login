@@ -4,7 +4,7 @@ import styles from "./UserDetailsCard.module.css";
 import { onLogOut } from "../../redux/actions";
 import { useNavigate } from "react-router";
 
-const HoverCard = () => {
+const UserDetailsCard = () => {
   const { avatar, name, email, isLoggedIn, phonenumber } = useSelector(
     (state) => state.users
   );
@@ -44,4 +44,4 @@ const HoverCard = () => {
   );
 };
 
-export default HoverCard;
+export default UserDetailsCard;
